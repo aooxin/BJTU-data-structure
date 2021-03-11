@@ -20,6 +20,8 @@ int main()
 	InsertList(StaffList, 1, s2);
 	DisplayAll(StaffList);
 	DeleteStaff(StaffList, 1, s3);
-	printf("%d",ExtendList(StaffList));
+	printf("%d\n",ExtendList(StaffList));
+	DisplayAll(StaffList);
+	printf("%d\n", StaffList.listsize);
 	return 0;
 }
