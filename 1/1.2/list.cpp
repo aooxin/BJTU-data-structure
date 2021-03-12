@@ -63,15 +63,37 @@ int FindByID(const Linklist L, int id)
 
 int DeleteByID(Linklist& L, int id)
 {
-	Lnode* p=L->next;
-	int x = FindByID(L, id),j=1;
-	if (x == 0)return 0;
-	while (p!=NULL&&j<x-1)
+	try
 	{
-		j++;
-		p = p->next;
+		Lnode* p = L->next;
+		int x = FindByID(L, id) - 1, j = 1;
+		if (x == -1)throw -1;
+		if (x!=0)
+		{
+			while (p->next != NULL && j < x)
+			{
+				j++;
+				p = p->next;
+			}
+			if (p->next == NULL)throw - 2;
+			Lnode* temp = p->next;
+			p->next = temp->next;
+			return 1;
+		}
+		if (x==0)
+		{
+			L->next = p->next;
+			return 1;
+		}
 	}
-	Lnode* temp = p->next->next;
-	p->next = temp;
-	return 1;
+	catch(int e)
+	{
+		printf("cant find!");
+		return 0;
+	}
+	catch (...) 
+	{
+		printf("delete error!");
+		return 0;
+	}
 }
