@@ -58,15 +58,15 @@ bool ListDelete(LinkList& L, int i)
 	free(q);
 	return true;
 }
-bool DeleteInMaxkAndMink(LinkList& L, int Mink,int Maxk)
+bool DeleteInMaxkAndMink(LinkList& L, int Mink, int Maxk)
 {
 	Lnode* p = L->next;
 	Lnode* prior_p = L;
 	int j = 0;
-	bool IsMinFound=false,IsMaxFound=false;
-	while (p!=NULL)
+	bool IsMinFound = false, IsMaxFound = false;
+	while (p != NULL)
 	{
-		if (p->data>=Mink)
+		if (p->data >= Mink)
 		{
 			IsMinFound = true;
 			break;
@@ -74,27 +74,27 @@ bool DeleteInMaxkAndMink(LinkList& L, int Mink,int Maxk)
 		p = p->next;
 		prior_p = prior_p->next;
 	}
-	if (IsMinFound==true)
+	if (IsMinFound == true)
 	{
 		p = prior_p;
-		while (p!=NULL)
+		while (p != NULL)
 		{
-			if (Maxk<=p->data)
+			if (Maxk <= p->data)
 			{
 				IsMaxFound = true;
 				break;
 			}
 			j++;
 			p = p->next;
-			
 		}
 	}
-	Lnode* temp = prior_p->next;
-	for (int i=1;i<j;i++)
+	
+	for (int i = 0; i < j; i++)
 	{
-		temp = temp->next;
+		Lnode* temp = prior_p->next;
+		prior_p->next = temp->next;
+		free(temp);
 	}
-	prior_p->next = temp->next;
 	return true;
 }
 #endif

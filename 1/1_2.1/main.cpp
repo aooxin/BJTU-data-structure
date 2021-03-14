@@ -8,7 +8,7 @@ int main()
 		ListInsert(L, i, i);
 	}
 	DisplayAll(L);
-	DeleteInMaxkAndMink(L, 3, 6);
+	DeleteInMaxkAndMink(L, 2, 2);
 	DisplayAll(L);
 	return 0;
 }
