@@ -2,13 +2,11 @@
 int main()
 {
 	LinkList L;
-	InitList(L);
-	for (int i=0;i<10;i++)
-	{
-		ListInsert(L, i, i);
-	}
+	CreateList(L);
 	DisplayAll(L);
-	DeleteInMaxkAndMink(L, 2, 2);
+	int Kmin = 5, Kmax = 5;
+	printf("删除%d和%d之间的\n", Kmin, Kmax);
+	DeleteInMaxkAndMink(L, Kmin, Kmax);
 	DisplayAll(L);
 	return 0;
 }

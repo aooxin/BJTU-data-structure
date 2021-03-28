@@ -1,6 +1,4 @@
 #pragma once
-#ifndef LIST_H
-#define LIST_H
 #include <stdlib.h>
 #include <stdio.h>
 typedef struct Lnode
@@ -14,17 +12,38 @@ bool InitList(LinkList& L)
 	L->next = NULL;
 	return true;
 }
+bool CreateList(LinkList& L)
+{
+	try
+	{
+		L = (LinkList)malloc(sizeof(Lnode));
+		L->next = NULL;
+		for (int i=0;i<10;i++)
+		{
+			Lnode* p;
+			p = (LinkList)malloc(sizeof(Lnode));
+			p->data = 10-i;
+			p->next = L->next;
+			L->next = p;
+		}
+		return true;
+	}
+	catch (...)
+	{
+		printf("CreateList error");
+		return false;
+	}
+}
 bool ListInsert(LinkList& L, int i, int e)
 {
 	LinkList p = L;
 	Lnode* s;
 	int j = 0;
-	while (p != NULL && j < i - 1)
+	while (j < i - 1)
 	{
 		p = p->next;
 		++j;
 	}
-	if (p == NULL || j > i - 1)return 0;
 	s = (Lnode*)malloc(sizeof(Lnode));
 	s->data = e;
 	s->next = p->next;
@@ -97,4 +116,3 @@ bool DeleteInMaxkAndMink(LinkList& L, int Mink, int Maxk)
 	}
 	return true;
 }
-#endif
