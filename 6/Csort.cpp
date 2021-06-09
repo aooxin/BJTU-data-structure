@@ -115,58 +115,51 @@ int SelectMinkey(SqList& L, KeyType i)
 	return j;
 }
 
-void Merge(SqList& SL, SqList& TL,int i,int m, int n)
+void merge(RcdType* a, int i, int m, int n)
 {
-	int k,j;
-	//将有序的记录序列SL[i..m],SL[m+1..n]归为TR[i..n]
-	for (j=m+1,k=i;i<=m&&j<=n;++k)
+	RcdType b[MaxSize];
+	int j, k, p;
+	for (j = m + 1, p = k = i; p <= m && k <= n && j <= n; k++)
 	{
-		if (SL.r[i].key<=SL.r[j].key)
+		if ((a + p)->key <= (a + j)->key)
 		{
-			TL.r[k] = SL.r[i++];
+			b[k] = a[p];
+			p++;
 		}
 		else
 		{
-			TL.r[k] = SL.r[j++];
+			b[k] = a[j];
+			j++;
 		}
 	}
-	int ktmp = k, ntmp = n, mtmp = m,itmp=i;
-	if (i<=m)
+	if (p <= m)
 	{
-		for (;ktmp<=m;ktmp++,itmp++)
-		{
-			TL.r[ktmp] = SL.r[itmp];
-		}
+		for (int s = k, t = p; s <= n; s++, t++)
+			b[s] = a[t];
 	}
-	itmp = j;
-	if (j<=n)
+	if (j <= n)
 	{
-		for (; ktmp <= m; ktmp++, itmp++)
-		{
-			TL.r[ktmp] = SL.r[itmp];
-		}
+		for (int s = k, t = j; s <= n; s++, t++)
+			b[s] = a[t];
 	}
+	for (int c = i; c <= n; c++)
+		a[c] = b[c];
 }
-void Msort(SqList& SL, SqList& TL, int s, int t)
+
+void Msort(RcdType* a, int s, int t)
 {
-	//将SL[s..t]归并排序为TL[s..t]
-	SqList Tl2;
-	if (s == t)
-	{
-		TL.r[s] = SL.r[s];
-	}
-	else
+	if (s != t)
 	{
 		int m = (s + t) / 2;
-		Msort(SL, Tl2, s, m);
-		Msort(SL, Tl2, m + 1, t);
-		Merge(Tl2, TL, s, m, t);
+		Msort(a, s, m);
+		Msort(a, m + 1, t);
+		merge(a, s, m, t);
 	}
 }
 
 void MergeSort(SqList& L)
 {
-	Msort(L, L, 1, L.length);
+	Msort(L.r, 1, L.length);
 }
 
 void HeapAdjust(RcdType(&R)[MaxSize], int s, int m)

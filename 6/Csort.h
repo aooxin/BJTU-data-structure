@@ -4,7 +4,6 @@ typedef int KeyType;
 typedef struct 
 {
 	KeyType key;
-
 }RcdType;
 
 typedef struct 
@@ -12,7 +11,8 @@ typedef struct
 	RcdType r[MaxSize];
 	int length;
 }SqList;
-void BiInsertionSort(SqList& L);//’€∞Î≈≈–Ú
+//’€∞Î≈≈–Ú
+void BiInsertionSort(SqList& L);
 
 //√∞≈›
 void BubbleSort(SqList& L);//√∞≈›
@@ -27,8 +27,8 @@ void SelectSort(SqList& L);
 int SelectMinkey(SqList&L,KeyType i);//—°i..n ◊Ó–°µƒ
 
 //πÈ≤¢≈≈–Ú
-void Merge(SqList& SL, SqList& TL, int i, int m, int n);
-void Msort(SqList& SL, SqList& TL, int s, int t);
+void merge(RcdType* a, int i, int m, int n);
+void Msort(RcdType* a, int s, int t);
 void MergeSort(SqList& L);
 
 //∂—≈≈–Ú

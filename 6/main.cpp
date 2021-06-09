@@ -20,7 +20,7 @@ int main()
 	//QSort(list, 1, list.length);
 	//SelectSort(list);
 	//MergeSort(list);
-	HeapSort(list);
+	//HeapSort(list);
 	for (int i = 1; i <= 10; i++)
 	{
 		cout<<list.r[i].key<<"   ";
